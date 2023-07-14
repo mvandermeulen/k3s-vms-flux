@@ -1,0 +1,101 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: plex
+  namespace: media
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 1.5.1
+      interval: 15m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  interval: 15m
+  install:
+    disableWait: true
+    remediation:
+      retries: 100
+  upgrade:
+    remediation:
+      retries: 100
+  values:
+    image:
+      repository: ghcr.io/onedr0p/plex
+      tag: 1.32.4.7195-7c8f9d3b6@sha256:39c4ad71d92790d54b2d14be5fdabca940591ab2b9f8291d02653cd4f80d9d4f
+
+    env:
+      TZ: "${TZ}"
+
+    podSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: "OnRootMismatch"
+      supplementalGroups: [44, 109, 10000]
+
+    service:
+      main:
+        type: LoadBalancer
+        annotations:
+          "io.cilium/lb-ipam-ips": "${SVC_PLEX_IP}"
+        ports:
+          http:
+            port: 32400
+
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+          external-dns.alpha.kubernetes.io/target: "${SECRET_CLOUDFLARE_TUNNEL_ID}.cfargotunnel.com"
+        hosts:
+          - host: &host "plex.${SECRET_DOMAIN_CASA}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+            secretName: wildcard-tls
+
+      local:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "nginx-${CLUSTER_NAME}.${SECRET_DOMAIN_INTERNAL}"
+        hosts:
+          - host: &hostinternal "{{ .Release.Name }}.${SECRET_DOMAIN_INTERNAL}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *hostinternal
+            secretName: wildcard-tls
+
+    persistence:
+      config:
+        enabled: true
+        existingClaim: plex-config-0
+      media:
+        enabled: true
+        existingClaim: media-nfs
+        mountPath: /data
+      transcode:
+        enabled: true
+        type: emptyDir
+        medium: Memory
+
+    resources:
+      requests:
+        cpu: 200m
+        memory: 4Gi
+        gpu.intel.com/i915: 1
+      limits:
+        gpu.intel.com/i915: 1
+        memory: 32G

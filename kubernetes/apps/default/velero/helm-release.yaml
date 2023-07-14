@@ -1,0 +1,100 @@
+# yamllint disable
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: velero
+  namespace: default
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://vmware-tanzu.github.io/helm-charts
+      chart: velero
+      version: 4.1.3
+      sourceRef:
+        kind: HelmRepository
+        name: vmware-tanzu
+        namespace: flux-system
+      interval: 5m
+  install:
+    crds: Create
+  upgrade:
+    crds: CreateReplace
+  values:
+    image:
+      repository: velero/velero
+      tag: v1.11.0
+    configuration:
+      backupStorageLocation:
+        - name: default
+          bucket: velero
+          provider: aws
+          default: true
+          config:
+            region: us-east-1
+            s3ForcePathStyle: true
+            s3Url: http://192.168.1.22:9000
+            publicUrl: http://192.168.1.22:9000
+      volumeSnapshotLocation:
+        - name: aws
+          provider: aws
+          config:
+            region: us-east-1
+      resticTimeout: 6h
+    initContainers:
+    - name: velero-plugin-for-aws
+      image: velero/velero-plugin-for-aws:v1.7.0
+      imagePullPolicy: IfNotPresent
+      volumeMounts:
+      - mountPath: /target
+        name: plugins
+    resources:
+      requests:
+        memory: 300Mi
+        cpu: 25m
+      limits:
+        memory: 1500Mi
+    # tolerations:
+    # - key: "arm"
+    #   operator: "Exists"
+    # enableHelmHooks: false
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+    backupsEnabled: true
+    snapshotsEnabled: true
+    deployNodeAgent: true
+    upgradeCRDs: true
+    nodeAgent:
+      podVolumePath: /var/lib/kubelet/pods
+      privileged: false
+      tolerations:
+     # - key: "arm"
+     #   operator: "Exists"
+      - key: "node-role.kubernetes.io/master"
+        operator: "Exists"
+      resources:
+        requests:
+          memory: 200Mi
+          cpu: 15m
+        limits:
+          memory: 3000Mi
+          cpu: null
+    credentials:
+      existingSecret: velero-helm-values
+    schedules:
+      daily-backup:
+        schedule: "0 4 * * *"
+        template:
+          ttl: "120h"
+#     minecraft-hourly:
+#       schedule: "0 */6 * * *"
+#       template:
+#         labelSelector:
+#           matchLabels:
+#             app: kalooma-minecraft
+#         ttl: "120h"
+#         includedNamespaces:
+#         - default
