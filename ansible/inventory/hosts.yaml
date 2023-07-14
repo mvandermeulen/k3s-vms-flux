@@ -1,0 +1,37 @@
+---
+kubernetes:
+  children:
+    master:
+      hosts:
+        k3s-nvme1:
+          ansible_user: dstewen
+          ansible_host: 192.168.10.94
+        k3s-nvme2:
+          ansible_user: dstewen
+          ansible_host: 192.168.10.95
+        k3s-nvme3:
+          ansible_user: dstewen
+          ansible_host: 192.168.10.96
+    worker:
+      hosts:
+        k3s-nvme4:
+          ansible_user: dstewen
+          ansible_host: 192.168.10.97
+        k3s-nvme5:
+          ansible_user: dstewen
+          ansible_host: 192.168.10.98
+        k3s-nvme6:
+          ansible_user: dstewen
+          ansible_host: 192.168.10.99
+        nuc1:
+          ansible_user: dstewen
+          ansible_host: 192.168.10.100
+        nuc3:
+          ansible_user: dstewen
+          ansible_host: 192.168.10.102
+        blade7:
+          ansible_user: dstewen
+          ansible_host: 192.168.10.37
+        blade8:
+          ansible_user: dstewen
+          ansible_host: 192.168.10.38
