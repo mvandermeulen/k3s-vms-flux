@@ -44,7 +44,7 @@ spec:
         type: ClusterIP
 
     env:
-      TZ: ${TZ}
+      TZ: "${TIMEZONE}"
       PUID: "568"
       PGID: "65539"
 

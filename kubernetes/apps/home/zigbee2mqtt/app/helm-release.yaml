@@ -32,7 +32,7 @@ spec:
       tag: 1.32.1
 
     env:
-      TZ: "${TZ}"
+      TZ: "${TIMEZONE}"
       ZIGBEE2MQTT_DATA: /data
       ZIGBEE2MQTT_CONFIG_MQTT_USER: "${MQTT_USER}"
       ZIGBEE2MQTT_CONFIG_MQTT_PASSWORD: "${MQTT_PASSWORD}"

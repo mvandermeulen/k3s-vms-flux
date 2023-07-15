@@ -27,7 +27,7 @@ spec:
             port: 8181
 
     env:
-      TZ: "${TZ}"
+      TZ: "${TIMEZONE}"
 
     dnsConfig:
       options:

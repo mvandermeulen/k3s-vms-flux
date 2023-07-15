@@ -49,7 +49,7 @@ spec:
           value: "1"
 
     env:
-      TZ: "${TZ}"
+      TZ: "${TIMEZONE}"
       JELLYFIN_CACHE_DIR: "/config/cache"
       DOTNET_SYSTEM_IO_DISABLEFILELOCKING: "true"
 

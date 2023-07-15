@@ -28,7 +28,7 @@ spec:
               memory: 1Gi
           env:
             - name: TZ
-              value: "${TZ}"
+              value: "${TIMEZONE}"
             - name: PLEX_URL
               value: http://plex.media:32400
             - name: PLEX_TOKEN

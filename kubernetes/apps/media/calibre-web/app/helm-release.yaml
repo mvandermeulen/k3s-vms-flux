@@ -31,7 +31,7 @@ spec:
     enableServiceLinks: false
 
     env:
-      TZ: ${TZ}
+      TZ: "${TIMEZONE}"
 
     persistence:
       config:
