@@ -6,4 +6,4 @@ namespace: monitoring
 resources:
   - ./configmap.yaml
   - ./helmrelease.yaml
-  - ./objectbucketclaim.yaml
+#  - ./objectbucketclaim.yaml
