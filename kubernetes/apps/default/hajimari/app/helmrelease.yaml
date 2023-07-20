@@ -73,8 +73,10 @@ spec:
               icon: switch
             - name: Grafana-DS
               url: https://grafana.davidstewen.com
+              icon: simple-icons:grafana
             - name: Grafana-Blades
               url: https://192.168.10.151/
+              icon: simple-icons:grafana
             - name: Gitops
               url: https://gitops.davidstewen.com/
     ingress:
