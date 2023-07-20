@@ -43,7 +43,40 @@ spec:
       namespaceSelector:
         matchNames:
           - default
+          - home
+          - media
           - monitoring
+          - networking
+          - rook-ceph
+          - storage
+      name: "Turtle"
+      customApps:
+        - group: Home
+          apps:
+            - name: pfsense
+              url: http://192.168.10.1
+              icon: wall-fire
+            - name: Synology
+              url: http://192.168.10.15:5000
+              icon: test-tube
+            - name: S3400-48T6SP
+              url: http://192.168.10.3
+              icon: switch
+            - name: T1500G-10MPS
+              url: http://192.168.10.20
+              icon: switch
+            - name: S3700-24T4F
+              url: http://192.168.10.2
+              icon: switch
+            - name: Rook Internal
+              url: https://192.168.10.102:8443/
+              icon: switch
+            - name: Grafana-DS
+              url: https://grafana.davidstewen.com
+            - name: Grafana-Blades
+              url: https://192.168.10.151/
+            - name: Gitops
+              url: https://gitops.davidstewen.com/
     ingress:
       main:
         enabled: true
