@@ -26,12 +26,16 @@ kubernetes:
         nuc1:
           ansible_user: dstewen
           ansible_host: 192.168.10.100
+          ceph_drives: /dev/disk/by-id/scsi-SATA_Samsung_SSD_860_S419NGAK201355E
         nuc3:
           ansible_user: dstewen
           ansible_host: 192.168.10.102
+          ceph_drives: /dev/disk/by-id/scsi-SATA_Samsung_SSD_860_S3YANB0K230462F
         blade7:
           ansible_user: dstewen
           ansible_host: 192.168.10.37
+          ceph_drives: /dev/disk/by-id/nvme-WD_Blue_SN570_500GB_220628800801
         blade8:
           ansible_user: dstewen
           ansible_host: 192.168.10.38
+          ceph_drives: /dev/disk/by-id/nvme-WD_Blue_SN570_500GB_220628800737
