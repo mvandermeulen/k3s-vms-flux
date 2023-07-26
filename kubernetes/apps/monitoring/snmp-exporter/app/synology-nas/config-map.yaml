@@ -2840,6 +2840,5 @@ data:
           type: DisplayString
         - labels: []
           labelname: serviceInfoIndex
-      timeout: 60s
       auth:
         community: public
