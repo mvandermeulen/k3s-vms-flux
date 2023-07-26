@@ -2841,4 +2841,4 @@ data:
         - labels: []
           labelname: serviceInfoIndex
       auth:
-        community: synology
+        community: public
