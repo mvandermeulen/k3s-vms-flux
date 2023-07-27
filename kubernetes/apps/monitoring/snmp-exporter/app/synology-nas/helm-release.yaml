@@ -41,4 +41,4 @@ spec:
       relabelings:
         - sourceLabels: [__param_target]
           targetLabel: instance
-      scrapeTimeout: 60s
+#      scrapeTimeout: 60s
