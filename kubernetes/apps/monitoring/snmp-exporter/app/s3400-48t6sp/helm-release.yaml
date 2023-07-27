@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: S3400-48T6SP-snmp-exporter
+  name: s3400-48t6sp-snmp-exporter
   namespace: monitoring
 spec:
   interval: 5m
@@ -19,22 +19,22 @@ spec:
   install:
     createNamespace: true
   values:
-    fullnameOverride: S3400-48T6SP-snmp-exporter
+    fullnameOverride: s3400-48t6sp-snmp-exporter
     image:
       repository: quay.io/prometheus/snmp-exporter
     extraArgs:
       - "--config.file=/config/snmp.yaml"
     extraConfigmapMounts:
-      - name: S3400-48T6SP-snmp-exporter
+      - name: s3400-48t6sp-snmp-exporter
         mountPath: /config/snmp.yaml
         subPath: snmp.yaml
-        configMap: S3400-48T6SP-snmp-exporter
+        configMap: s3400-48t6sp-snmp-exporter
         readOnly: true
         defaultMode: 420
     serviceMonitor:
       enabled: true
       params:
-        - name: S3400-48T6SP
+        - name: s3400-48t6sp
           target: 192.168.10.3
           module:
             - if_mib
@@ -46,4 +46,4 @@ spec:
         - source_labels: [__param_target]
           target_label: instance
         - target_label: __address__
-          replacement: S3400-48T6SP-snmp-exporter:9116
+          replacement: s3400-48t6sp-snmp-exporter:9116
