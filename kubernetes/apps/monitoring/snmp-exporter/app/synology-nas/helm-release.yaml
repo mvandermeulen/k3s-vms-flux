@@ -38,8 +38,9 @@ spec:
           target: 192.168.10.15
           module:
             - synology
+      scrapeTimeout: 30s
+      scrapeInterval: 60s
       relabelings:
-#      scrapeTimeout: 60s
         - source_labels: [__address__]
           target_label: __param_target
         - source_labels: [__param_target]
