@@ -39,7 +39,7 @@ spec:
           module:
             - synology
       scrapeTimeout: 60s
-      scrapeInterval: 60s
+#      scrapeInterval: 60s
       relabelings:
         - source_labels: [__address__]
           target_label: __param_target
