@@ -1,5 +1,4 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/helm.toolkit.fluxcd.io/helmrelease_v2beta1.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -10,10 +9,10 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 1.4.0
+      version: 1.5.1
       sourceRef:
         kind: HelmRepository
-        name: bjw-s
+        name: bjw-s-charts
         namespace: flux-system
   maxHistory: 2
   install:
@@ -31,10 +30,10 @@ spec:
         reloader.stakater.com/auto: "true"
     image:
       repository: docker.io/1password/connect-api
-      tag: 1.6.1
+      tag: 1.7.1
     env:
-      OP_BUS_PORT: "11220"
-      OP_BUS_PEERS: "localhost:11221"
+      OP_BUS_PORT: 11220
+      OP_BUS_PEERS: localhost:11221
       OP_HTTP_PORT: &port 8080
       OP_SESSION:
         valueFrom:
@@ -71,8 +70,10 @@ spec:
       main:
         enabled: true
         ingressClassName: nginx
+        annotations:
+          hajimari.io/enable: "false"
         hosts:
-          - host: &host "{{ .Release.Name }}.devbu.io"
+          - host: &host onepassword-connect.${SECRET_PUBLIC_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
@@ -95,7 +96,7 @@ spec:
         memory: 100Mi
     sidecars:
       sync:
-        image: docker.io/1password/connect-sync:1.6.1
+        image: docker.io/1password/connect-sync:1.7.1
         imagePullPolicy: IfNotPresent
         env:
           - { name: OP_HTTP_PORT, value: &port 8081 }
