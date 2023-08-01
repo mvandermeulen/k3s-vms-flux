@@ -7,3 +7,4 @@ resources:
   - ./secret.sops.yaml
   - ./helmrelease.yaml
   - ./clustersecretstore.yaml
+  - ./onepassword.connect.secret.sops.yaml
