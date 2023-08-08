@@ -17,7 +17,6 @@ spec:
         namespace: flux-system
   maxHistory: 2
   install:
-    createNamespace: true
     remediation:
       retries: 3
   upgrade:
@@ -28,8 +27,40 @@ spec:
     keepHistory: false
   values:
     kind: Deployment
+    schedule: "*/5 * * * *"
     deschedulerPolicy:
       strategies:
+        RemovePodsHavingTooManyRestarts:
+          enabled: true
+          params:
+            podsHavingTooManyRestarts:
+              podRestartThreshold: 5
+              includingInitContainers: true
+        RemovePodsViolatingTopologySpreadConstraint:
+          enabled: true
+          params:
+            includeSoftConstraints: true
+        PodLifeTime:
+          enabled: true
+          params:
+            podLifeTime:
+              states:
+                - Pending
+                - PodInitializing
+                - ContainerCreating
+              maxPodLifeTimeSeconds: 3600
+        RemoveFailedPods:
+          enabled: true
+          params:
+            failedPods:
+              reasons:
+                - NodeShutdown
+                - ImagePullBackOff
+                - CreateContainerConfigError
+              includingInitContainers: true
+              excludeOwnerKinds:
+                - Job
+              minPodLifetimeSeconds: 3600
         RemoveDuplicates:
           enabled: true
         RemovePodsViolatingNodeTaints:
@@ -37,50 +68,21 @@ spec:
         RemovePodsViolatingNodeAffinity:
           enabled: true
           params:
-            nodeAffinityType: ["requiredDuringSchedulingIgnoredDuringExecution"]
-        RemovePodsViolatingTopologySpreadConstraint:
-          enabled: true
-          params:
-            includeSoftConstraints: true
+            nodeAffinityType:
+              - requiredDuringSchedulingIgnoredDuringExecution
         RemovePodsViolatingInterPodAntiAffinity:
           enabled: true
-          params:
-            nodeFit: true
         LowNodeUtilization:
           enabled: true
-#          params:
-#            nodeResourceUtilizationThresholds:
-#              thresholds:
-#                "memory": 50
-#              targetThresholds:
-#                "memory": 80
-        RemoveFailedPods:
-          enabled: true
           params:
-            failedPods:
-              includingInitContainers: true
-              excludeOwnerKinds: ["Job"]
-              minPodLifetimeSeconds: 3600
-        RemovePodsHavingTooManyRestarts:
-          enabled: true
-          params:
-            podsHavingTooManyRestarts:
-              podRestartThreshold: 100
-              includingInitContainers: true
+            nodeResourceUtilizationThresholds:
+              thresholds:
+                cpu: 35
+                memory: 35
+              targetThresholds:
+                cpu: 40
+                memory: 40
     service:
       enabled: true
     serviceMonitor:
       enabled: true
-    podAnnotations:
-      configmap.reloader.stakater.com/reload: "descheduler"
-    affinity:
-      podAntiAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                  - key: app.kubernetes.io/name
-                    operator: In
-                    values: ["descheduler"]
-              topologyKey: kubernetes.io/hostname
