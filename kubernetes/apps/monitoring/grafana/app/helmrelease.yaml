@@ -61,133 +61,133 @@ spec:
       datasources.yaml:
         apiVersion: 1
         datasources:
-          - name: Prometheus
+          - name: Prometheus-Provisioned
             type: prometheus
             access: proxy
-            url: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
+            url: http://prometheus-operated.monitoring.svc.cluster.local:9090
             isDefault: true
     dashboards:
       default:
         cert-manager:
           url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/cert-manager/dashboards/cert-manager.json
-          datasource: Prometheus
+          datasource: Prometheus-Provisioned
         flux-cluster:
           url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/monitoring-config/dashboards/cluster.json
-          datasource: Prometheus
+          datasource: Prometheus-Provisioned
         flux-control-plane:
           url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/monitoring-config/dashboards/control-plane.json
-          datasource: Prometheus
+          datasource: Prometheus-Provisioned
         flux-logs:
           url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/monitoring-config/dashboards/logs.json
-          datasource: Prometheus
+          datasource: Prometheus-Provisioned
         # Ref: https://grafana.com/grafana/dashboards/2842-ceph-cluster/
         ceph-cluster:
           gnetId: 2842
           revision: 17
-          datasource: Prometheus
+          datasource: Prometheus-Provisioned
         # Ref: https://grafana.com/grafana/dashboards/5336-ceph-osd-single/
         ceph-osd:
           gnetId: 5336
           revision: 9
-          datasource: Prometheus
+          datasource: Prometheus-Provisioned
         # Ref: https://grafana.com/grafana/dashboards/5342-ceph-pools/
         ceph-pools:
           gnetId: 5342
           revision: 9
-          datasource: Prometheus
+          datasource: Prometheus-Provisioned
         # Ref: https://grafana.com/grafana/dashboards/13502-minio-dashboard/
         minio:
           gnetId: 13502
           revision: 22
-          datasource: Prometheus
+          datasource: Prometheus-Provisioned
         # Ref: https://grafana.com/grafana/dashboards/1860-node-exporter-full/
         node-exporter-full:
           gnetId: 1860
           revision: 31
-          datasource: Prometheus
+          datasource: Prometheus-Provisioned
         # Ref: https://grafana.com/grafana/dashboards/763-redis-dashboard-for-prometheus-redis-exporter-1-x/
         redis:
           gnetId: 763
           revision: 5
-          datasource: Prometheus
+          datasource: Prometheus-Provisioned
         # Ref: https://grafana.com/grafana/dashboards/11315-unifi-poller-client-insights-prometheus/
         unifi-insights:
           gnetId: 11315
           revision: 9
-          datasource: Prometheus
+          datasource: Prometheus-Provisioned
         # Ref: https://grafana.com/grafana/dashboards/11314-unifi-poller-uap-insights-prometheus/
         unifi-uap:
           gnetId: 11314
           revision: 10
-          datasource: Prometheus
+          datasource: Prometheus-Provisioned
         # Ref: https://grafana.com/grafana/dashboards/11312-unifi-poller-usw-insights-prometheus/
         unifi-usw:
           gnetId: 11312
           revision: 9
-          datasource: Prometheus
+          datasource: Prometheus-Provisioned
         cloudnative-pg:
           url: https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/main/docs/src/samples/monitoring/grafana-dashboard.json
-          datasource: Prometheus
+          datasource: Prometheus-Provisioned
         external-secrets:
           url: https://raw.githubusercontent.com/external-secrets/external-secrets/main/docs/snippets/dashboard.json
-          datasource: Prometheus
+          datasource: Prometheus-Provisioned
         ingress-nginx:
           url: https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/grafana/dashboards/nginx.json
-          datasource: Prometheus
+          datasource: Prometheus-Provisioned
         ingress-nginx-request-handling-performance:
           url: https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/grafana/dashboards/request-handling-performance.json
-          datasource: Prometheus
+          datasource: Prometheus-Provisioned
         kubernetes-api-server:
           url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-system-api-server.json
-          datasource: Prometheus
+          datasource: Prometheus-Provisioned
         kubernetes-coredns:
           url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-system-coredns.json
-          datasource: Prometheus
+          datasource: Prometheus-Provisioned
         kubernetes-global:
           url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-global.json
-          datasource: Prometheus
+          datasource: Prometheus-Provisioned
         kubernetes-namespaces:
           url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-namespaces.json
-          datasource: Prometheus
+          datasource: Prometheus-Provisioned
         kubernetes-nodes:
           url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-nodes.json
-          datasource: Prometheus
+          datasource: Prometheus-Provisioned
         kubernetes-pods:
           url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-pods.json
-          datasource: Prometheus
+          datasource: Prometheus-Provisioned
         loki-chunks:
           url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/loki/dashboards/loki-chunks.json
-          datasource: Prometheus
+          datasource: Prometheus-Provisioned
         loki-deletion:
           url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/loki/dashboards/loki-deletion.json
-          datasource: Prometheus
+          datasource: Prometheus-Provisioned
         loki-logs:
           url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/loki/dashboards/loki-logs.json
-          datasource: Prometheus
+          datasource: Prometheus-Provisioned
         loki-mixin-recording-rules:
           url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/loki/dashboards/loki-mixin-recording-rules.json
-          datasource: Prometheus
+          datasource: Prometheus-Provisioned
         loki-operational:
           url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/loki/dashboards/loki-operational.json
-          datasource: Prometheus
+          datasource: Prometheus-Provisioned
         loki-reads-resources:
           url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/loki/dashboards/loki-reads-resources.json
-          datasource: Prometheus
+          datasource: Prometheus-Provisioned
         loki-reads:
           url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/loki/dashboards/loki-reads.json
-          datasource: Prometheus
+          datasource: Prometheus-Provisioned
         loki-retention:
           url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/loki/dashboards/loki-retention.json
-          datasource: Prometheus
+          datasource: Prometheus-Provisioned
         loki-writes-resources:
           url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/loki/dashboards/loki-writes-resources.json
-          datasource: Prometheus
+          datasource: Prometheus-Provisioned
         loki-writes:
           url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/loki/dashboards/loki-writes.json
-          datasource: Prometheus
+          datasource: Prometheus-Provisioned
         miniflux:
           url: https://raw.githubusercontent.com/miniflux/v2/main/contrib/grafana/dashboard.json
-          datasource: Prometheus
+          datasource: Prometheus-Provisioned
     sidecar:
       dashboards:
         enabled: true
