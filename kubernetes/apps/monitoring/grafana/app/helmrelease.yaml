@@ -26,8 +26,8 @@ spec:
   uninstall:
     keepHistory: false
   dependsOn:
-    - name: local-path-provisioner
-      namespace: kube-system
+#    - name: local-path-provisioner
+#      namespace: kube-system
     - name: ingress-nginx
       namespace: networking
   values:
@@ -215,7 +215,7 @@ spec:
         - hosts:
             - *host
     persistence:
-      enabled: true
-      storageClassName: local-path
+      enabled: false
+#      storageClassName: local-path
     testFramework:
       enabled: false
