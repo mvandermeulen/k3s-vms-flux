@@ -184,6 +184,10 @@ spec:
         miniflux:
           url: https://raw.githubusercontent.com/miniflux/v2/main/contrib/grafana/dashboard.json
           datasource: Prometheus-Provisioned
+        speedtest:
+          gnetId: 13665
+          revision: 1
+          datasource: Prometheus-Provisioned
       ceph:
         ceph-cluster:
           gnetId: 2842 # https://grafana.com/grafana/dashboards/2842?tab=revisions
@@ -264,6 +268,7 @@ spec:
       - natel-discrete-panel
       - pr0ps-trackmap-panel
       - vonage-status-panel
+      - cloudflare-app
     serviceMonitor:
       enabled: true
     ingress:
