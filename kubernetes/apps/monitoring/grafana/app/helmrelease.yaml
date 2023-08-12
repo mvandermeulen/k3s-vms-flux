@@ -65,6 +65,14 @@ spec:
             editable: true
             options:
               path: /var/lib/grafana/dashboards/ceph
+          - name: cilium
+            orgId: 1
+            folder: Cilium
+            type: file
+            disableDeletion: false
+            editable: true
+            options:
+              path: /var/lib/grafana/dashboards/cilium
           - name: flux
             orgId: 1
             folder: Flux
@@ -118,6 +126,10 @@ spec:
               maxLines: 250
     dashboards:
       default:
+        # Ref: https://grafana.com/grafana/dashboards/11074-node-exporter-for-prometheus-dashboard-en-v20201010/
+        1-node-exporter:
+          url: https://grafana.com/api/dashboards/11074/revisions/9/download
+          datasource: Prometheus-Provisioned
         cert-manager:
           url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/cert-manager/dashboards/cert-manager.json
           datasource: Prometheus-Provisioned
@@ -126,6 +138,9 @@ spec:
           revision: 6
           datasource:
             - { name: DS_PROMETHEUS, value: Prometheus-Provisioned }
+        cloudnative-pg:
+          url: https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/main/docs/src/samples/monitoring/grafana-dashboard.json
+          datasource: Prometheus-Provisioned
         external-dns:
           gnetId: 15038 # https://grafana.com/grafana/dashboards/15038?tab=revisions
           revision: 1
@@ -144,9 +159,6 @@ spec:
         redis:
           gnetId: 763
           revision: 5
-          datasource: Prometheus-Provisioned
-        cloudnative-pg:
-          url: https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/main/docs/src/samples/monitoring/grafana-dashboard.json
           datasource: Prometheus-Provisioned
         external-secrets:
           url: https://raw.githubusercontent.com/external-secrets/external-secrets/main/docs/snippets/dashboard.json
@@ -200,6 +212,16 @@ spec:
         ceph-pools:
           gnetId: 5342 # https://grafana.com/grafana/dashboards/5342?tab=revisions
           revision: 9
+          datasource: Prometheus-Provisioned
+      cilium:
+        cilium-dashboard:
+          url: https://raw.githubusercontent.com/cilium/cilium/v1.14.0/examples/kubernetes/addons/prometheus/files/grafana-dashboards/cilium-dashboard.json
+          datasource: Prometheus-Provisioned
+        cilium-operator-dashboard:
+          url: https://raw.githubusercontent.com/cilium/cilium/v1.14.0/examples/kubernetes/addons/prometheus/files/grafana-dashboards/cilium-operator-dashboard.json
+          datasource: Prometheus-Provisioned
+        hubble-dashboard:
+          url: https://raw.githubusercontent.com/cilium/cilium/v1.14.0/examples/kubernetes/addons/prometheus/files/grafana-dashboards/hubble-dashboard.json
           datasource: Prometheus-Provisioned
       flux:
         flux-cluster:
