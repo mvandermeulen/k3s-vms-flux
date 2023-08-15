@@ -5,3 +5,4 @@ metadata:
   name: media
   annotations:
     linkerd.io/inject: enabled
+    volsync.backube/privileged-movers: "true"
