@@ -169,6 +169,10 @@ spec:
         loki-deletion:
           url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/loki/dashboards/loki-deletion.json
           datasource: Prometheus-Provisioned
+        loki-kubernetes-logs:
+          gnetId: 15141 # https://grafana.com/grafana/dashboards/15141?tab=revisions
+          revision: 1
+          datasource: Loki
         loki-logs:
           url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/loki/dashboards/loki-logs.json
           datasource: Prometheus-Provisioned
