@@ -32,6 +32,8 @@ spec:
       devices:
         - /dev/sda
         - /dev/nvme0n1
+    nodeSelector:
+      kubernetes.io/arch: amd64
     serviceMonitor:
       enabled: true
     prometheusRules:
