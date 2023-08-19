@@ -139,3 +139,7 @@ spec:
               resources:
                 requests:
                   storage: 10Gi
+        additionalScrapeConfigs:
+          - job_name: ceph
+            static_configs:
+              - targets: ['localhost:9283']
