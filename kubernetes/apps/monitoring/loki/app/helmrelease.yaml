@@ -127,6 +127,7 @@ spec:
     read:
       persistence:
         storageClass: local-path
+        size: 5Gi
       extraVolumeMounts:
         - name: rules
           mountPath: /rules
@@ -136,9 +137,11 @@ spec:
     write:
       persistence:
         storageClass: local-path
+        size: 5Gi
     backend:
       persistence:
         storageClass: local-path
+        size: 5Gi
       extraVolumeMounts:
         - name: rules
           mountPath: /rules/fake
