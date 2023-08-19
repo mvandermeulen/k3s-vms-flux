@@ -12,16 +12,17 @@ spec:
   prune: true
   sourceRef:
     kind: GitRepository
-    name: home-ops-kubernetes
+    name: home-kubernetes
   dependsOn:
     - name: cluster-apps-cloudnative-pg-cluster
+    - name: cluster-apps-external-secrets-stores
     - name: cluster-apps-rook-ceph-cluster
     - name: cluster-apps-volsync-app
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
       name: vaultwarden
-      namespace: default
+      namespace: home
   interval: 30m
   retryInterval: 1m
-  timeout: 3m
+  timeout: 5m
