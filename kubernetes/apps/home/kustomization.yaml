@@ -5,7 +5,7 @@ resources:
   - namespace.yaml
   - ./home-assistant/ks.yaml
 #  - mailqtt/ks.yaml
-  - ./mosquitto/ks.yaml
+#  - ./mosquitto/ks.yaml
 #  - ./scrypted/ks.yaml
 #  - ./smtp-relay/ks.yaml
 #  - ./unifi-backup/ks.yaml
