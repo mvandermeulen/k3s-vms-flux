@@ -27,7 +27,8 @@ spec:
       main:
         type: LoadBalancer
         annotations:
-          "io.cilium/lb-ipam-ips": "${SVC_MOSQUITTO_IP}"
+          external-dns.alpha.kubernetes.io/hostname: mosquitto.davidstewen.com
+          io.cilium/lb-ipam-ips: 192.168.10.222
         externalTrafficPolicy: Cluster
     auth:
       enabled: true
