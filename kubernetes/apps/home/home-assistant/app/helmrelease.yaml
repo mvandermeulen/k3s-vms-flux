@@ -28,6 +28,8 @@ spec:
   dependsOn:
     - name: rook-ceph-cluster
       namespace: rook-ceph
+    - name: ingress-nginx
+      namespace: networking
   values:
     initContainers:
       01-init-db:
@@ -58,9 +60,9 @@ spec:
         enabled: true
         ingressClassName: nginx
         annotations:
-          external-dns.alpha.kubernetes.io/target: ingress.davidstewen.com
+          external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
         hosts:
-          - host: &host home-assistant.davidstewen.com
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
