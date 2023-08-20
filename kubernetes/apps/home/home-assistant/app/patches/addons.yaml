@@ -25,7 +25,7 @@ spec:
           - "/config/.vscode"
         ingress:
           enabled: true
-          ingressClassName: internal
+          ingressClassName: nginx
           hosts:
             - host: &host hass-code.davidstewen.com
               paths:
