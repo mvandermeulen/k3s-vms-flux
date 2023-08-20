@@ -60,7 +60,7 @@ spec:
         annotations:
           external-dns.alpha.kubernetes.io/target: ingress.davidstewen.com
         hosts:
-          - host: &host hass.davidstewen.com
+          - host: &host home-assistant.davidstewen.com
             paths:
               - path: /
                 pathType: Prefix
