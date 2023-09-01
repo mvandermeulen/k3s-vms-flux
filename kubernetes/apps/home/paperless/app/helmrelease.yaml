@@ -39,7 +39,7 @@ spec:
         reloader.stakater.com/auto: "true"
     image:
       repository: ghcr.io/paperless-ngx/paperless-ngx
-      tag: 1.17.1
+      tag: 1.17.3
     env:
       PAPERLESS_ALLOWED_HOSTS: paperless.devbu.io
       PAPERLESS_CONSUMER_POLLING: 60
