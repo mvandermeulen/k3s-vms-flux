@@ -58,7 +58,7 @@ spec:
               icon: wall-fire
             - name: Synology
               url: http://192.168.10.15:5000
-              icon: test-tube
+              icon: nas
             - name: S3400-48T6SP
               url: http://192.168.10.3
               icon: switch
@@ -70,7 +70,7 @@ spec:
               icon: switch
             - name: Rook Internal
               url: https://192.168.10.102:8443/
-              icon: switch
+              icon: mdi:chess-rook
             - name: Grafana-DS
               url: https://grafana.davidstewen.com
               icon: simple-icons:grafana
